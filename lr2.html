@@ -6,8 +6,6 @@
     <title>Game Life</title>
     <style>
     canvas {
-        width: 500px;
-        height: 300px;
         border: 2px solid black;
     }
     body{
@@ -34,28 +32,26 @@
         padding: 20px;
         margin: 10px;
     }
-    
     </style>
-    <script>
-    
-    </script>
 </head>
 <body>
     <div class="field">
-    <canvas></canvas>
+    <canvas id="field_canvas" width="500" height="300"></canvas>
     </div>
     <div class="interface">
         <div class="buttons">
-            <button>Старт</button>
-            <button>Стоп</button>
-            <button>Сброс</button>   
+            <button id="start">Старт</button>
+            <button id="stop">Стоп</button>
+            <button id="reset">Сброс</button>   
         </div>
-    <p>Введите размер поля X: <input type="number" size="3" name="numX" min="100" max="1000" value="500" step="50"></p> 
-    <p>Введите размер поля Y: <input type="number" size="3" name="numY" min="100" max="1000" value="300" step="50"></p> 
-    <button>Применить</button> 
+    <p>Введите размер поля X: <input type="number" size="3" name="numX" min="100" max="1000" value="500" step="50" id="sizeX"></p> 
+    <p>Введите размер поля Y: <input type="number" size="3" name="numY" min="100" max="1000" value="300" step="50" id="sizeY"></p> 
+    <button id="apply">Применить</button> 
     <p>Скорость:
-    <p><input type="range" min="0" max="100" step="1" value="50"> 
+    <p><input type="range" min="0" max="100" step="1" value="50" id="speed"> 
 </div>
-    
+<script>
+
+</script>
 </body>
 </html>
