@@ -30,7 +30,7 @@ function goLife() {
     // Для создания больших точек (10х10)
     _010_defX = defX / 10;
     _010_defY = defY / 10;
-    debugger
+    //debugger
     mas = [];
     var n = _010_defX, m = _010_defY;
     for (var i = 0; i < m; i++) {
@@ -78,6 +78,57 @@ function drawField() {
 /////
 // Проверка
 
+function find_number_neighbors() {
+    var mas2 = [];
+    for (var i = 0; i < _010_defY; i++) {
+        mas2[i] = [];
+        for (var j = 0; j < _010_defX; j++) {
+            //debugger
+            var neighbors = 0;
+            // top
+            if (mas[(i - 1 >= 0) ? i - 1 : _010_defY - 1][j] == 1) neighbors++;
+            // right
+            if (mas[i][(j + 1 < _010_defX - 1 )? j + 1 : 0] == 1) neighbors++;
+            // bottom
+            if (mas[(i + 1 <= _010_defY - 1 )? i + 1 : 0][j] == 1) neighbors++;
+            // left
+            if (mas[i][(j - 1 >= 0 )? j - 1 : _010_defX - 1] == 1) neighbors++;
+            // up-right
+            if (mas[(i - 1 >= 0 )? i - 1 : _010_defY - 1][(j + 1 <= _010_defX - 1 ? j + 1 : 0)] == 1) neighbors++;
+            // bottom-right
+            if (mas[(i + 1 <= _010_defY - 1) ? i + 1 : 0][(j + 1 <= _010_defX - 1 ? j + 1 : 0)] == 1) neighbors++;
+            // bottom-left
+            if (mas[(i + 1 <= _010_defY - 1) ? i + 1 : 0][(j - 1 >= 0 ? j - 1 : _010_defX - 1)] == 1) neighbors++;
+            // top-left
+            if (mas[(i - 1 >= 0 )? i - 1 : _010_defY - 1][(j - 1 >= 0 ? j - 1 : _010_defX - 1)] == 1) neighbors++;
+
+
+            /// Действия для клеток
+            if (mas[i][j] == 1) {
+                if (neighbors < 2 || neighbors > 3)
+                    mas2[i][j] = 0;
+                else if (neighbors == 2 || neighbors == 3)
+                    mas2[i][j] = 1;
+            }
+            else {
+                if (neighbors == 3)
+                    mas2[i][j] = 1;
+            }
+        }
+    }
+
+    /// Если не изменился
+    if (mas != mas2)
+        mas = mas2;
+    drawField();
+    generation++;
+    document.getElementById("generation").innerHTML = generation;
+
+
+
+}
+
+
 
 
 function apply_sizes(){ //Меняет размеры поля
@@ -101,7 +152,7 @@ btn_start.addEventListener("click", function() {
     //TODO:
 
 
-
+    find_number_neighbors();
     console.log("Кнопка start нажата.");
 });
 
