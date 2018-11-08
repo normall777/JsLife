@@ -55,8 +55,8 @@ field_canvas.onclick = function (event) {
     console.log(x);
     console.log(y);
     x = Math.floor(x/10 ); 
-    y = Math.floor(y/10 ); 
-    mas[y][x] = 1;
+    y = Math.floor(y / 10);
+    (mas[y][x] == 1) ? mas[y][x] = 0 : mas[y][x] = 1;
     console.log(mas);
     drawField();
 }
@@ -89,7 +89,7 @@ function find_number_neighbors() {
             // top
             if (mas[(i - 1 >= 0) ? i - 1 : _010_defY - 1][j] == 1) neighbors++;
             // right
-            if (mas[i][(j + 1 < _010_defX - 1 )? j + 1 : 0] == 1) neighbors++;
+            if (mas[i][(j + 1 <= _010_defX - 1 )? j + 1 : 0] == 1) neighbors++;
             // bottom
             if (mas[(i + 1 <= _010_defY - 1 )? i + 1 : 0][j] == 1) neighbors++;
             // left
@@ -119,15 +119,28 @@ function find_number_neighbors() {
     }
 
     /// Если не изменился
-    if (mas != mas2)
+    if (isEqualArray2(mas, mas2))
+        work = false;
+
+    else if (mas != mas2) {
         mas = mas2;
-    drawField();
-    generation.innerHTML++;
-    
-    if (work)
-        timer = setTimeout(find_number_neighbors, 100/input_speed.value);
+        drawField();
+        if (work) {
+            generation.innerHTML++;
+            timer = setTimeout(find_number_neighbors, 100 / input_speed.value);
+        }
+    }
 
 
+
+}
+
+function isEqualArray1(a1, a2) {
+    return a1.every((v, i) => v === a2[i]);
+}
+
+function isEqualArray2(a1, a2) {
+    return a1.every((v, i) => isEqualArray1(v, a2[i]));
 }
 
 
@@ -170,11 +183,26 @@ btn_stop.addEventListener("click", function() {
 var btn_reset = document.getElementById("btn_reset"); // Кнопка сброс
 btn_reset.addEventListener("click", function() {
     //TODO:
+    work = false;
     goLife();
     drawField();
     generation.innerHTML = 0;
     work = false;
     console.log("Кнопка reset нажата.");
+});
+
+var btn_random = document.getElementById("btn_random"); // Кнопка случайно
+btn_random.addEventListener("click", function () {
+    //TODO:
+
+    for (var i = 0; i < _010_defY; i++) {
+        for (var j = 0; j < _010_defX; j++) {
+            mas[i][j] = (Math.random() > 0.5) ? 1 : 0;
+        }
+    }
+    drawField();
+    
+    console.log("Кнопка random нажата.");
 });
 
 
