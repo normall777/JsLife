@@ -151,8 +151,11 @@ function apply_sizes(){ //Меняет размеры поля
     defX = numX.value;
     field_canvas.height = numY.value;
     defY = numY.value;
+    work = false;
     goLife();
     drawField();
+    generation.innerHTML = 0;
+    work = false;
 
 }
 
