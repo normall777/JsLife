@@ -125,7 +125,7 @@ function find_number_neighbors() {
     generation.innerHTML++;
     
     if (work)
-        timer = setTimeout(find_number_neighbors, 100/input_speed.value);
+        timer = setTimeout(find_number_neighbors, 1000/input_speed.value);
 
 
 }
