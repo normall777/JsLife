@@ -124,13 +124,13 @@ function find_number_neighbors() {
 
     else if (mas != mas2) {
         mas = mas2;
+
         drawField();
         if (work) {
             generation.innerHTML++;
             timer = setTimeout(find_number_neighbors, 1000 / input_speed.value);
         }
     }
-
 
 
 }
