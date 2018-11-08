@@ -7,6 +7,7 @@ var field_canvas_context = field_canvas.getContext("2d");
 var generation = document.getElementById("generation") // Счетчик поколения
 var mas = [];
 var _010_defX, _010_defY;
+var work = false;
 
 init();
 
@@ -121,9 +122,10 @@ function find_number_neighbors() {
     if (mas != mas2)
         mas = mas2;
     drawField();
-    generation++;
-    document.getElementById("generation").innerHTML = generation;
-
+    generation.innerHTML++;
+    
+    if (work)
+        timer = setTimeout(find_number_neighbors, 100/input_speed.value);
 
 
 }
@@ -151,6 +153,7 @@ var btn_start = document.getElementById("btn_start"); // Кнопка старт
 btn_start.addEventListener("click", function() {
     //TODO:
 
+    work = true;
 
     find_number_neighbors();
     console.log("Кнопка start нажата.");
@@ -160,7 +163,7 @@ var btn_stop = document.getElementById("btn_stop"); // Кнопка стоп
 btn_stop.addEventListener("click", function() {
     //TODO:
 
-
+    work = false;
     console.log("Кнопка stop нажата.");
 });
 
@@ -169,7 +172,8 @@ btn_reset.addEventListener("click", function() {
     //TODO:
     goLife();
     drawField();
-
+    generation.innerHTML = 0;
+    work = false;
     console.log("Кнопка reset нажата.");
 });
 
