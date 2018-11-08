@@ -127,7 +127,7 @@ function find_number_neighbors() {
         drawField();
         if (work) {
             generation.innerHTML++;
-            timer = setTimeout(find_number_neighbors, 100 / input_speed.value);
+            timer = setTimeout(find_number_neighbors, 1000 / input_speed.value);
         }
     }
 
